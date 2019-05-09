@@ -31,3 +31,17 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'SEGA LOGO FONT';
+  font-style: normal;
+  font-weight: normal;
+  src: local('SEGA LOGO FONT'), url('SEGA.woff') format('woff');
+}
+
+.header {
+  font-family: 'SEGA LOGO FONT';
+  font-weight: 200;
+  font-size: 72px;
+  color: rgb(22,110,192);
+}
