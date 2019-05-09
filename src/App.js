@@ -11,9 +11,9 @@ import SearchBar from './SearchBar.js';
 import CardList from './CardList.js'
 
 const APIKEY = '2e14c8c248ffe44081b033c01ff6eb2b'; 
-const APIURL = 'api.openweathermap.org/data/2.5/forecast?zip=80634&mode=xml&appid=2e14c8c248ffe44081b033c01ff6eb2b'
-//
-fetch(APIURL).then(resp => console.log(resp))
+
+fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=80634&mode=json&appid=${APIKEY}`)
+   .then(resp => console.log(resp))
 
 let fakeData = [
   {
