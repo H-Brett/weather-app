@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Sun from './icons/Sun.png';
 import Cloudy from './icons/Cloudy.png'; 
@@ -11,9 +11,6 @@ import SearchBar from './SearchBar.js';
 import CardList from './CardList.js'
 
 const APIKEY = '2e14c8c248ffe44081b033c01ff6eb2b'; 
-
-fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=80634&mode=json&appid=${APIKEY}`)
-   .then(resp => console.log(resp))
 
 let fakeData = [
   {
@@ -48,14 +45,58 @@ let fakeData = [
   },
 ];
 
-function App() {
-  return (
-    <div className="App">
-      <h1 className='header mb2'>Forecast</h1>
-      <SearchBar />
-      <CardList data={fakeData} />      
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super(); 
+
+    this.state = {
+      data: [], 
+    }
+  }
+
+
+  getData = async (zipCode) => {
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&mode=json&units=imperial&appid=${APIKEY}`)
+    let json = await response.json(); 
+    let dataObj = await {data: json.list};
+    let data = dataObj.data
+    let filteredData = data.filter((obj, i) => {
+           return obj.dt_txt.includes('06:00:00') || obj.dt_txt.includes('15:00:00')
+      }); 
+    return filteredData;
+    
+    
+      // })
+      // .then(data => {
+      //   const filteredItems = data.list.filter(obj => {
+      //     return obj.dt_txt.includes('06:00:00') || obj.dt_txt.includes('15:00:00')
+      //   })
+      //   return filteredItems;
+      // })
+
+      // return icon;
+  }
+
+
+  onSearchChange = (event) => {
+    let { value } = event.target; 
+    if(value.length === 5 && new RegExp(/[0-9]/).test(value)) { // tests that user input is 5 digits only
+      let data = this.getData(value);
+      console.log(data);
+    }
+  }
+
+
+
+  render() {
+    return (
+      <div className="App">
+        <h1 className='header mb2'>Forecast</h1>
+        <SearchBar onSearchChange={this.onSearchChange} />
+        <CardList data={fakeData} />      
+      </div>
+    );
+}
 }
 
 export default App;

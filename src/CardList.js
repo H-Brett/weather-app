@@ -14,7 +14,8 @@ const CardList = ({data}) => {
 	})
 
 	return (
-		<div className='mt5'>
+		<div className='mt5 dib ba pa3'>
+			<h3 className='tl mb0'>Greeley</h3>
 			{cards}
 		</div>
 
