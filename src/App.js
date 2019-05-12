@@ -56,44 +56,43 @@ class App extends Component {
 
 
   getData = async (zipCode) => {
-    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&mode=json&units=imperial&appid=${APIKEY}`)
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&mode=json&units=imperial&appid=${APIKEY}`) 
     let json = await response.json(); 
-    let dataObj = await {data: json.list};
-    let data = dataObj.data
-    let filteredData = data.filter((obj, i) => {
-           return obj.dt_txt.includes('06:00:00') || obj.dt_txt.includes('15:00:00')
-      }); 
-    return filteredData;
-    
-    
-      // })
-      // .then(data => {
-      //   const filteredItems = data.list.filter(obj => {
-      //     return obj.dt_txt.includes('06:00:00') || obj.dt_txt.includes('15:00:00')
-      //   })
-      //   return filteredItems;
-      // })
+    let data = await json; 
+    this.setState({fetch: data}) 
+    // let filteredData = data.filter((obj, i) => {
+    //        return i === 0 || i == 39 || obj.dt_txt.includes('06:00:00') || obj.dt_txt.includes('15:00:00')
+    //   }); 
+  }    
 
-      // return icon;
+  componentDidUpdate(prevProps, prevState) {
+
+    let { fetch } = this.state; 
+    let cityName = fetch.city.name;
+    
+
+    if(this.state.fetch !== prevState.fetch) {
+      let list = [...this.state.data, <CardList key={cityName} data={fakeData} realData={fetch} />]
+      this.setState({data: list})
+    }
   }
-
 
   onSearchChange = (event) => {
     let { value } = event.target; 
     if(value.length === 5 && new RegExp(/[0-9]/).test(value)) { // tests that user input is 5 digits only
-      let data = this.getData(value);
-      console.log(data);
+      this.getData(value);
+      event.target.value = ''
     }
   }
-
-
 
   render() {
     return (
       <div className="App">
         <h1 className='header mb2'>Forecast</h1>
         <SearchBar onSearchChange={this.onSearchChange} />
-        <CardList data={fakeData} />      
+        {
+          this.state.data
+        }    
       </div>
     );
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import Card from './Card';
 
-const CardList = ({data}) => {
+const CardList = ({ data, realData }) => {
+	console.log(realData);
 	let cards = data.map((x, i) => {
 		return (
 			<Card 
@@ -14,8 +15,8 @@ const CardList = ({data}) => {
 	})
 
 	return (
-		<div className='mt5 dib ba pa3'>
-			<h3 className='tl mb0'>Greeley</h3>
+		<div className='mt4 dib ba pa3'>
+			<h3 className='tl mb0'>{realData.city.name}</h3>
 			{cards}
 		</div>
 
