@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+}
+
+
+@font-face {
+  font-family: 'SEGA LOGO FONT';
+  font-style: normal;
+  font-weight: normal;
+  src: local('SEGA LOGO FONT'), url('SEGA.woff') format('woff');
+}
+
+.header {
+  font-family: 'SEGA LOGO FONT';
+  font-weight: 200;
+  font-size: 72px;
+  color: rgb(4, 42, 78);
+}
+
+h3 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/*22,110,192*/

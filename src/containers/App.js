@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import SearchBar from './SearchBar.js';
-import CardList from './CardList.js'
+import SearchBar from '../components/SearchBar.js';
+import CardList from '../components/CardList.js'
 
 const APIKEY = ''; 
 // const ZIPCODEKEY = ''; 

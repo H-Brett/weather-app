@@ -1,18 +1,16 @@
 import React from 'react';
 import Card from './Card';
-import Sun from './icons/Sun.png';
-import Cloudy from './icons/Cloudy.png'; 
-import PartlyCloudy from './icons/PartlyCloudy.png';
-import Rain from './icons/Rain.png';
-import Snow from './icons/Snow.png';
-import Storm from './icons/Storm.png';
-import Windy from './icons/Windy.png';
-import Fog from './icons/Fog.png';
+import Sun from '../icons/Sun.png';
+import Cloudy from '../icons/Cloudy.png'; 
+import PartlyCloudy from '../icons/PartlyCloudy.png';
+import Rain from '../icons/Rain.png';
+import Snow from '../icons/Snow.png';
+import Storm from '../icons/Storm.png';
+import Windy from '../icons/Windy.png';
+import Fog from '../icons/Fog.png';
 
 
 const CardList = ({ fetch }) => {
-
-
 	let processedData = fetch.data.map((day, i) => {
 		let returnObj = {
 			high: Math.round(day.max_temp),
@@ -78,8 +76,8 @@ const CardList = ({ fetch }) => {
 	})
 
 	return (
-		<div className='mt4 dib ba pa3'>
-			<h3 className='tl mb0'>{fetch.city_name}</h3>
+		<div className='mt3 dib br3 ba pa3 shadow-1' style={{backgroundColor: 'rgb(221, 162, 0)'}}>
+			<h3 className='tl mb0' style={{color: 'rgb(4, 42, 78)'}}>{fetch.city_name}</h3>
 			{cards}
 		</div>
 
