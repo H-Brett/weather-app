@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = (props) => {
 	return (
-		<div className='dib ba mr3 mt1 pl4 pr4 br3 grow shadow-3' style={{backgroundColor: 'rgb(0, 85, 155)'}}>
+		<div className='dib ba ma2 pl4 pr4 br3 grow shadow-3' style={{backgroundColor: 'rgb(0, 85, 155)'}}>
 			<span className='f3 fw7' style={{color: 'white'}}>{props.day}</span><br />
 			<img alt='...' src={props.icon} />
 			<div>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import SearchBar from '../components/SearchBar.js';
-import CardList from '../components/CardList.js'
+import CardList from '../components/CardList.js';
+import ErrorBoundary from '../components/ErrorBoundary.js'; 
 
-const APIKEY = ''; 
-// const ZIPCODEKEY = ''; 
-const CLIENTSIDEKEY = '';
+const APIKEY = '5e50b89e4fe848c09c23c63048c86126'; 
+// const ZIPCODEKEY = 'QD83bIniR5FlO80H4QQFDDuFWV4i946TwoxYLLZNekQIYpL6VRO2COeLyW2XBbJO'; 
+const CLIENTSIDEKEY = 'js-MTNv13Zz6m1Ln4Y0uvkthHcHdMCAfyU8VRp77TiEbcLXuf8KXSFAGfD7Ki2iFzlF';
 
 class App extends Component {
   constructor() {
@@ -15,25 +16,38 @@ class App extends Component {
       data: [], 
       fetch: {}, 
       city: '', 
-      stateAbbr: '',  
+      stateAbbr: '', 
+      isError: false,  
     }
   };
 
   getWeatherData = async (city, state) => {
-    let response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&country=US&state=${state}&units=i&days=5&key=${APIKEY}`);
-    let json = await response.json(); 
-    let data = await json; 
-    this.setState({fetch: data}) 
+    try { 
+      const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&country=US&state=${state}&units=i&days=5&key=${APIKEY}`);
+      const json = await response.json(); 
+      const data = await json; 
+
+      this.setState({fetch: data}) 
+    } catch(err) {
+      this.setState({isError: true})
+    }
+
+    
   }    
 
-  getCityData = async (zipCode) => {
-    let response = await fetch(`http://www.zipcodeapi.com/rest/${CLIENTSIDEKEY}/info.json/${zipCode}/degrees`);
-    let json = await response.json(); 
-    let data = await json; 
-    this.setState({
-      city: data.city, 
-      stateAbbr: data.state, 
-    })
+  getCityData = async (zipCode, event) => {
+    try {
+      const response = await fetch(`http://www.zipcodeapi.com/rest/${CLIENTSIDEKEY}/info.json/${zipCode}/degrees`);
+      const json = await response.json(); 
+      const data = await json; 
+
+      this.setState({
+        city: data.city, 
+        stateAbbr: data.state, 
+      })
+    } catch(err) {
+      this.setState({isError: true})
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -42,16 +56,22 @@ class App extends Component {
     }
     
     if(this.state.fetch !== prevState.fetch) { // if new fetch, create new cardlist
-      let list = [...this.state.data, <CardList key={this.state.city} fetch={this.state.fetch} />]
-      this.setState({data: list})
+      const list = [...this.state.data, <CardList key={this.state.city} fetch={this.state.fetch} />]
+      this.setState({data: list, isError: false})
     }
   }
 
   onSearchChange = (event) => {
-    let { value } = event.target; 
+    const { value } = event.target; 
     if(value.length === 5 && new RegExp(/[0-9]/).test(value)) { // tests that user input is 5 digits only
-      this.getCityData(value);
-      value = ''
+      this.getCityData(value, event);
+      event.target.value = '';
+    }
+  }
+
+  onEnterKey = (event) => {
+    if(event.which === 13){
+      this.onSearchChange(event);
     }
   }
 
@@ -59,9 +79,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className='header mb2'>Forecast</h1>
-        <SearchBar onSearchChange={this.onSearchChange} />
+        <SearchBar onSearchChange={this.onSearchChange} onEnterKey={this.onEnterKey}/>
         {
-          this.state.data
+          Array.from(new Set(this.state.data))
         }    
       </div>
     );

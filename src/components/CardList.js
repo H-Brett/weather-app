@@ -9,16 +9,18 @@ import Storm from '../icons/Storm.png';
 import Windy from '../icons/Windy.png';
 import Fog from '../icons/Fog.png';
 
-
 const CardList = ({ fetch }) => {
-	let processedData = fetch.data.map((day, i) => {
-		let returnObj = {
+	const processedData = fetch.data.map((day, i) => {
+		const returnObj = {
 			high: Math.round(day.max_temp),
 			low: Math.round(day.min_temp), 
+			day: '',
 		}; 
-		let icon = day.weather.code; 
-		let date = new Date().getDay() + i; 
-		
+		const icon = day.weather.code; 
+		const date = day.datetime.split('-')
+		let dayOfWeek = new Date(date[0], date[1] - 1 , date[2]).toString().slice(0,3).toUpperCase(); 
+		returnObj.day = dayOfWeek; 
+
 		if(icon  <300) {
 			returnObj.icon = Storm; 
 		} else if ( icon >= 300 && icon < 600 ) {
@@ -35,36 +37,10 @@ const CardList = ({ fetch }) => {
 			returnObj.icon = Sun; 
 		}
 
-		switch( date ) {
-			case 0: 
-				returnObj.day = 'SUN'
-				break; 
-			case 1:
-				returnObj.day = 'MON'
-				break;
-			case 2:
-				returnObj.day = 'TUE'
-				break;
-			case 3: 
-				returnObj.day = 'WED'
-				break;
-			case 4: 
-				returnObj.day = 'THU'
-				break;
-			case 5: 
-				returnObj.day = 'FRI'
-				break;
-			case 6: 
-				returnObj.day = 'SAT'
-				break;
-			default: 
-				break; 
-		}
-
 		return returnObj; 
 	});
 
-	let cards = processedData.map((obj, i) => {
+	const cards = processedData.map((obj, i) => {
 		return (
 			<Card 
 				key={i}
@@ -76,8 +52,8 @@ const CardList = ({ fetch }) => {
 	})
 
 	return (
-		<div className='mt3 dib br3 ba pa3 shadow-1' style={{backgroundColor: 'rgb(221, 162, 0)'}}>
-			<h3 className='tl mb0' style={{color: 'rgb(4, 42, 78)'}}>{fetch.city_name}</h3>
+		<div className='mt3 dib br3 ba pa3 shadow-1 ml2 mr2' style={{backgroundColor: 'rgba(1, 22, 34,0.7)'}}>
+			<h3 className='tl mb0 ml2 mt1' style={{color: 'rgb(44, 124, 167)'}}>{fetch.city_name}</h3>
 			{cards}
 		</div>
 
