@@ -1,0 +1,14 @@
+{
+    "name": "Weather",
+    "short_name": "Weather",
+    "icons": [
+        {
+            "src": "/android-chrome-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#0865c3",
+    "background_color": "#0865c3",
+    "display": "standalone"
+}
