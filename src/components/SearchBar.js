@@ -4,6 +4,7 @@ const SearchBar = ({onSearchChange, onEnterKey}) => {
 	return (
 		<div className='pa2 tc'>
 			<input  
+				aria-label='Search Zip Code'
 				className='tc pa3 ba br2 b--black bg-light-blue' 
 				type='search' 
 				placeholder='Enter Zip Code' 

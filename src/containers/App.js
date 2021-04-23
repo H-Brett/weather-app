@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.css'; 
 import SearchBar from '../components/SearchBar.js';
 import CardList from '../components/CardList.js';
 import ErrorBoundary from '../components/ErrorBoundary.js'; 
 
 const APIKEY = '5e50b89e4fe848c09c23c63048c86126'; 
-// const ZIPCODEKEY = 'QD83bIniR5FlO80H4QQFDDuFWV4i946TwoxYLLZNekQIYpL6VRO2COeLyW2XBbJO'; 
-const CLIENTSIDEKEY = 'js-MTNv13Zz6m1Ln4Y0uvkthHcHdMCAfyU8VRp77TiEbcLXuf8KXSFAGfD7Ki2iFzlF';
+const ZIPCODEKEY = 'QD83bIniR5FlO80H4QQFDDuFWV4i946TwoxYLLZNekQIYpL6VRO2COeLyW2XBbJO'; 
+const CLIENTSIDEKEY = 'js-Euz5BCYjOkOPr4lapjBiFWLE6Gy706HRpebhcnxajNm6s5NFzreIR04vX1GZSF54'; // local
+// const CLIENTSIDEKEY = 'js-MTNv13Zz6m1Ln4Y0uvkthHcHdMCAfyU8VRp77TiEbcLXuf8KXSFAGfD7Ki2iFzlF'; // githubpages
 
 class App extends Component {
   constructor() {
@@ -37,7 +38,7 @@ class App extends Component {
 
   getCityData = async (zipCode, event) => {
     try {
-      const response = await fetch(`http://www.zipcodeapi.com/rest/${CLIENTSIDEKEY}/info.json/${zipCode}/degrees`);
+      const response = await fetch(`https://www.zipcodeapi.com/rest/${CLIENTSIDEKEY}/info.json/${zipCode}/degrees`);
       const json = await response.json(); 
       const data = await json; 
 

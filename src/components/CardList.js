@@ -52,7 +52,7 @@ const CardList = ({ fetch }) => {
 	})
 
 	return (
-		<div className='mt3 dib br3 ba pa3 shadow-1 ml2 mr2' style={{backgroundColor: 'rgba(1, 22, 34,0.7)'}}>
+		<div className='mt3 dib br3 ba pa3 shadow-1' style={{backgroundColor: 'rgba(1, 22, 34,0.7)'}}>
 			<h3 className='tl mb0 ml2 mt1' style={{color: 'rgb(44, 124, 167)'}}>{fetch.city_name}</h3>
 			{cards}
 		</div>
