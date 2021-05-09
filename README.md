@@ -2,9 +2,13 @@
 
 Simple 5 day React forecast app that takes US zip code and uses zipcodeapi to attain city information and weatherbit api to forecast. 
 
+Achieves 100 Lighthouse PWA evaluation score for Desktop and Mobile 
+
 Needs:
 
 Better error handling, currently either gives no feedback for incorrect 5 digit or for incorrect (non-numeric, too long, too short) 
+
+Better Mobile UX/UI
 
 Persistence, CRUD functionalities, databasing, features. 
 
