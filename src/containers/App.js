@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar.js';
 import CardList from '../components/CardList.js';
 import ErrorBoundary from '../components/ErrorBoundary.js'; 
 
-const APIKEY = '5e50b89e4fe848c09c23c63048c86126'; 
+const APIKEY = '485c28dc1fa44709aece56506517f53f'; 
 const ZIPCODEKEY = 'QD83bIniR5FlO80H4QQFDDuFWV4i946TwoxYLLZNekQIYpL6VRO2COeLyW2XBbJO'; 
 const CLIENTSIDEKEY = 'js-Euz5BCYjOkOPr4lapjBiFWLE6Gy706HRpebhcnxajNm6s5NFzreIR04vX1GZSF54'; // local
 // const CLIENTSIDEKEY = 'js-MTNv13Zz6m1Ln4Y0uvkthHcHdMCAfyU8VRp77TiEbcLXuf8KXSFAGfD7Ki2iFzlF'; // githubpages
